@@ -8,21 +8,22 @@ composer require --dev kirillzhirov/utils
 
 ## Usage
 ``` php
-\Utils\Reflection::invokeProtectedMethod($object, 'methodName', $arg1, $arg2);
-```
-``` php
-\Utils\Reflection::getObjectWithoutConstructor($className);
-\Utils\Reflection::getObjectWithoutConstructor($className, 'propertyName', 'propertyValue');
-```
-``` php
-\Utils\Reflection::getProtectedProperty($object, 'propertyName');
-```
-``` php
-\Utils\Reflection::setProtectedProperty($object, 'propertyName', 'propertyValue');
-```
-``` php
-\Utils\Reflection::getPrivateProperty($object, 'propertyName');
-```
-``` php
-\Utils\Reflection::setPrivateProperty($object, 'propertyName', 'propertyValue');
+class Foo {
+    private $bar;
+
+    public function __construct($bar)
+    {
+        $this->bar = $bar + 1;
+    }
+
+    private function baz($foo, $bar)
+    {
+        $this->bar = $this->bar * $foo - $bar;
+    }
+}
+
+$foo = Reflection::getObjectWithoutConstructor(Foo::class, 'bar', 10);
+Reflection::invokeProtectedMethod($foo, 'baz', 2, 5);
+$actual = Reflection::getProtectedProperty($foo, 'bar');
+$this->assertEquals(15, $actual);
 ```
