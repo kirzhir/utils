@@ -1,0 +1,23 @@
+{
+    "name": "kirillzhirov/utils",
+    "description": "Tools for development and unit testing",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Utils\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UtilsTest\\": "tests/"
+        }
+    }
+}
