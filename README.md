@@ -3,7 +3,9 @@ Tools for development and unit testing
 
 ## Installation
 
+```
 composer require --dev kirillzhirov/utils
+```
 
 ## Usage
 
