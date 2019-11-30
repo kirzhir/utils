@@ -8,7 +8,7 @@ composer require --dev kirillzhirov/utils
 
 ## Usage
 ``` php
-\Utils\Reflection::invokeProtectedMethod($object, 'methodName');
+\Utils\Reflection::invokeProtectedMethod($object, 'methodName', $arg1, $arg2);
 ```
 ``` php
 \Utils\Reflection::getObjectWithoutConstructor($className);
