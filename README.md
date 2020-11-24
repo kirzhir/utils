@@ -22,8 +22,17 @@ class Foo {
     }
 }
 
-$foo = Reflection::getObjectWithoutConstructor(Foo::class, 'bar', 10);
-Reflection::invokeProtectedMethod($foo, 'baz', 2, 5);
-$actual = Reflection::getProtectedProperty($foo, 'bar');
-$this->assertEquals(15, $actual);
+use PHPUnit\Framework\TestCase;
+use Utils\Reflection;
+
+class FooTest extends TestCase
+{
+    public function testBaz()
+    {
+        $foo = Reflection::getObjectWithoutConstructor(Foo::class, 'bar', 10);
+        Reflection::invokeProtectedMethod($foo, 'baz', 2, 5);
+        $actual = Reflection::getProtectedProperty($foo, 'bar');
+        $this->assertEquals(15, $actual);
+    }
+}
 ```
