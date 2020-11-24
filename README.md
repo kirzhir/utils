@@ -1,5 +1,8 @@
 # Utils
-Tools for development and unit testing
+Is a small helper package to ease testing with PHPUnit.
+ - Creating a mock object with disabled constructor and manually setted protected/private properties;
+ - Testing protected/private methods;
+ - Testing protected/private propeties.
 
 ## Installation
 ```
