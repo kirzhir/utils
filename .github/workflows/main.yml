@@ -8,22 +8,15 @@ on:
 
 jobs:
   run:
-    runs-on: ${{ matrix.operating-system }}
-    strategy:
-      matrix:
-        operating-system: [ubuntu-latest]
-        php-versions: ['7.2', '7.4']
-
-    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+    runs-on: ubuntu-latest
+    name: PHP 7.4 Test
     steps:
-
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Install PHP
+    - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.php-versions }}
+        php-version: 7.2
 
     - name: Validate composer.json and composer.lock
       run: composer validate
@@ -32,7 +25,4 @@ jobs:
       run: composer install --no-progress --no-suggest --dev
 
     - name: Run psalm
-      run: ./vendor/bin/psalm  --show-info=true
-
-    - name: Run phpunit 
-      run: ./vendor/bin/phpunit
+      run: .pwd
