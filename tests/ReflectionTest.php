@@ -52,15 +52,15 @@ class ReflectionTest extends TestCase
         };
 
         $actual = Reflection::invokeProtectedMethod($object, 'someProtectedFunction');
-        $this->assertEquals('foo', $actual);
+        self::assertEquals('foo', $actual);
 
         $actual = Reflection::invokeProtectedMethod($object, 'somePrivateFunction');
-        $this->assertEquals('bar', $actual);
+        self::assertEquals('bar', $actual);
 
         $actual = Reflection::invokeProtectedMethod(
             $object, 'someFunctionWithArgs', 'foo', 'bar'
         );
-        $this->assertEquals('foobar', $actual);
+        self::assertEquals('foobar', $actual);
 
         $this->expectException(\ReflectionException::class);
         Reflection::invokeProtectedMethod($object, 'nonExistingMethod');
@@ -73,19 +73,22 @@ class ReflectionTest extends TestCase
     {
         $actual = Reflection::getObjectWithoutConstructor(SomeClass::class);
         $expected = new SomeClass(null, null);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
 
         $actual = Reflection::getObjectWithoutConstructor(
             SomeClass::class, 'foo', 'someProtectedValue'
         );
         $expected = new SomeClass('someProtectedValue', null);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
 
         $actual = Reflection::getObjectWithoutConstructor(
             SomeClass::class, 'bar', 'somePrivateValue'
         );
         $expected = new SomeClass(null, 'somePrivateValue');
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
+
+        $actual = Reflection::getObjectWithoutConstructor('not_exist_class');
+        self::assertEquals(null, $actual);
 
         $this->expectException(\ReflectionException::class);
         Reflection::getObjectWithoutConstructor(
@@ -101,10 +104,10 @@ class ReflectionTest extends TestCase
         $object = new SomeClass('foo', 'bar');
 
         $actual = Reflection::getProtectedProperty($object, 'foo');
-        $this->assertEquals('foo', $actual);
+        self::assertEquals('foo', $actual);
 
         $actual = Reflection::getProtectedProperty($object, 'bar');
-        $this->assertEquals('bar', $actual);
+        self::assertEquals('bar', $actual);
 
         $this->expectException(\ReflectionException::class);
         Reflection::getProtectedProperty($object, 'nonExistingProperty');
@@ -119,11 +122,11 @@ class ReflectionTest extends TestCase
 
         $actual = Reflection::setProtectedProperty($object, 'foo', 'foo');
         $expected = new SomeClass('foo', null);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
 
         $actual = Reflection::setProtectedProperty($object, 'bar', 'bar');
         $expected = new SomeClass('foo', 'bar');
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
 
         $this->expectException(\ReflectionException::class);
         Reflection::setProtectedProperty($object, 'nonExistingProperty', 'bar');
@@ -137,7 +140,7 @@ class ReflectionTest extends TestCase
         $object = new class() extends SomeAbstractClass {};
 
         $actual = Reflection::getPrivateProperty($object, 'baz');
-        $this->assertEquals('baz', $actual);
+        self::assertEquals('baz', $actual);
 
         $this->expectException(\ReflectionException::class);
         Reflection::getPrivateProperty($object, 'nonExistingProperty');
@@ -151,7 +154,7 @@ class ReflectionTest extends TestCase
         $object = new class extends SomeAbstractClass {};
 
         $actual = Reflection::setPrivateProperty($object, 'baz', 'foo');
-        $this->assertEquals('foo', $actual->getBaz());
+        self::assertEquals('foo', $actual->getBaz());
 
         $this->expectException(\ReflectionException::class);
         Reflection::setPrivateProperty($object, 'nonExistingProperty', 'foo');

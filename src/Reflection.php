@@ -33,14 +33,18 @@ class Reflection
     /**
      * @param string $className
      * @param string|null $propertyName
-     * @param null $propertyValue
+     * @param mixed $propertyValue
      *
-     * @return object
+     * @return object|null
      *
      * @throws ReflectionException
      */
-    public static function getObjectWithoutConstructor(string $className, string $propertyName = null, $propertyValue = null): object
+    public static function getObjectWithoutConstructor(string $className, string $propertyName = null, $propertyValue = null): ?object
     {
+        if (class_exists($className) === false) {
+            return null;
+        }
+
         $object = new ReflectionClass($className);
         $object = $object->newInstanceWithoutConstructor();
 
@@ -70,7 +74,7 @@ class Reflection
     /**
      * @param object $object
      * @param string $propertyName
-     * @param $propertyValue
+     * @param mixed $propertyValue
      *
      * @return object
      *
@@ -106,7 +110,7 @@ class Reflection
     /**
      * @param object $object
      * @param string $propertyName
-     * @param $propertyValue
+     * @param mixed $propertyValue
      *
      * @return object
      *
@@ -135,7 +139,7 @@ class Reflection
     {
         if ($reflectionObject->hasProperty($propertyName) === false) {
             $parentClass = $reflectionObject->getParentClass();
-            if ($parentClass !== null) {
+            if ($parentClass !== false && class_exists($parentClass->name) !== false) {
                 $reflectionObject = self::propertyOwnerSearch(new ReflectionClass($parentClass->name), $propertyName);
             }
         }
