@@ -25,4 +25,7 @@ jobs:
       run: composer install --no-progress --no-suggest --dev
 
     - name: Run psalm
-      run: pwd
+      run: php vendor/bin/psalm
+
+    - name: Run phpunit
+      run: php vendor/bin/phpunit
