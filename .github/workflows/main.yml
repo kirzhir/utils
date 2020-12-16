@@ -25,4 +25,4 @@ jobs:
       run: composer install --no-progress --no-suggest --dev
 
     - name: Run psalm
-      run: .pwd
+      run: pwd
