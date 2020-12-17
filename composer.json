@@ -1,6 +1,6 @@
 {
     "name": "kirillzhirov/utils",
-    "description": "Tools for development and unit testing",
+    "description": "Tools for testing with PHPUnit",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "stable",
