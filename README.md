@@ -6,7 +6,7 @@ Is a small helper package to ease testing with PHPUnit.
 
 ## Installation
 ```
-composer require --dev kirillzhirov/utils
+composer require --dev kirzhir/utils
 ```
 
 ## Usage
